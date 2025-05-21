@@ -27,12 +27,22 @@ namespace ObjectResourcesApp
 
         private void Ok_OnClick(object sender, RoutedEventArgs e)
         {
-
+            var brush = this.FindResource("myBrush") as RadialGradientBrush;
+            if (brush != null)
+            {
+                var newB = brush.Clone();
+                newB.GradientStops[1] = new GradientStop(Colors.Black, 1);
+                Ok.Background = newB;
+            }
+            else 
+            {
+                MessageBox.Show("Current myBrush is not a RadialGradientBrush");
+            }
         }
 
         private void Cancel_OnClick(object sender, RoutedEventArgs e)
         {
-
+            Resources["myBrush"] = new SolidColorBrush(Colors.Red);
         }
     }
 }
